@@ -1,6 +1,3 @@
-[submodule "nexus-repository-composer"]
-	path = nexus-repository-composer
-	url = git@github.com:sonatype-nexus-community/nexus-repository-composer.git
 [submodule "nexus-repository-apk"]
 	path = nexus-repository-apk
 	url = https://github.com/sonatype-nexus-community/nexus-repository-apk.git
