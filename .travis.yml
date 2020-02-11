@@ -1,0 +1,14 @@
+language: bash
+
+services:
+- docker
+
+env:
+  matrix:
+  - NEXUS_VERSION=3.19.1 TAGS=0.0.1 NEXUS_BUILD=01
+
+script:
+- make 
+
+after_success:
+- . "${TRAVIS_BUILD_DIR}/release.sh"
