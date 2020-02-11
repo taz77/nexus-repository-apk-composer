@@ -1,5 +1,3 @@
-# declaration of NEXUS_VERSION must appear before first FROM command
-# see: https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG NEXUS_VERSION=latest
 
 FROM maven:3-jdk-8-alpine AS build
@@ -9,18 +7,18 @@ RUN cd /nexus-repository-apk/; \
     mvn clean package -PbuildKar;
 
 COPY nexus-repository-composer/. /nexus-repository-composer/
-RUN cd /nexus-repository-composer/; sed -i "s/3.13.0-01/${NEXUS_VERSION}-${NEXUS_BUILD}/g" pom.xml; \
+RUN cd /nexus-repository-composer/; sed -i "s/3.19.1-01/${NEXUS_VERSION}-${NEXUS_BUILD}/g" pom.xml; \
     mvn clean package;
 
 FROM sonatype/nexus3:$NEXUS_VERSION
 
 # APK settings
-ARG FORMAT_VERSION=0.0.1
+ARG FORMAT_VERSION=0.0.5-SNAPSHOT
 ARG DEPLOY_DIR=/opt/sonatype/nexus/deploy/
 
 
 # Composer settings
-ARG NEXUS_VERSION=3.13.0
+ARG NEXUS_VERSION=3.19.1
 ARG NEXUS_BUILD=01
 ARG COMPOSER_VERSION=0.0.2
 ARG TARGET_DIR=/opt/sonatype/nexus/system/org/sonatype/nexus/plugins/nexus-repository-composer/${COMPOSER_VERSION}/
