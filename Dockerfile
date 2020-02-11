@@ -1,6 +1,10 @@
-FROM maven:3-jdk-8-alpine AS build
+# Global Arg
 ARG NEXUS_VERSION=3.19.1
 ARG NEXUS_BUILD=01
+FROM maven:3-jdk-8-alpine AS build
+# Passing global vars into this stage of the build
+ARG NEXUS_VERSION
+ARG NEXUS_BUILD
 ENV NEXUS_VERSION=${NEXUS_VERSION} \
     NEXUS_BUILD=${NEXUS_BUILD}
 
@@ -14,16 +18,20 @@ RUN cd /nexus-repository-composer/; sed -i "s/3.19.1-01/${NEXUS_VERSION}-${NEXUS
 RUN cd /nexus-repository-apk/; \
     mvn clean package -PbuildKar;
 
-FROM sonatype/nexus3:$NEXUS_VERSION
+# Installation stage
+FROM sonatype/nexus3:${NEXUS_VERSION}
+# Passing global vars into this stage of the build
+ARG NEXUS_VERSION
+ARG NEXUS_BUILD
 
 # APK settings
 ARG FORMAT_VERSION=0.0.5-SNAPSHOT
 ARG DEPLOY_DIR=/opt/sonatype/nexus/deploy/
 
 # Composer settings
-ARG NEXUS_VERSION=3.19.1
-ARG NEXUS_BUILD=01
-ARG COMPOSER_VERSION=0.0.5-SNAPSHOT
+ARG NEXUS_VERSION
+ARG NEXUS_BUILD
+ARG COMPOSER_VERSION=0.0.2
 ARG TARGET_DIR=/opt/sonatype/nexus/system/org/sonatype/nexus/plugins/nexus-repository-composer/${COMPOSER_VERSION}/
 ENV NEXUS_VERSION=${NEXUS_VERSION} \
     NEXUS_BUILD=${NEXUS_BUILD}
