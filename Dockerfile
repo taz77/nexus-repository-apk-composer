@@ -23,8 +23,10 @@ ARG DEPLOY_DIR=/opt/sonatype/nexus/deploy/
 # Composer settings
 ARG NEXUS_VERSION=3.19.1
 ARG NEXUS_BUILD=01
-ARG COMPOSER_VERSION=0.0.2
+ARG COMPOSER_VERSION=0.0.5-SNAPSHOT
 ARG TARGET_DIR=/opt/sonatype/nexus/system/org/sonatype/nexus/plugins/nexus-repository-composer/${COMPOSER_VERSION}/
+ENV NEXUS_VERSION=${NEXUS_VERSION} \
+    NEXUS_BUILD=${NEXUS_BUILD}
 
 USER root
 # Copy APK kar
