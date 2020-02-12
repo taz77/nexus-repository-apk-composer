@@ -1,0 +1,47 @@
+version: "3.7"
+services:
+  nexus:
+    image: bowens/nexus-oss-apk-composer:latest
+    user: root
+    deploy:
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.nexus.rule=Host(`nexus.dev.somedomain.com`)"
+            - "traefik.http.routers.nexus.service=nexus-service"
+            - "traefik.http.services.nexus-service.loadbalancer.server.port=8081"
+            - "traefik.http.routers.nexus.entrypoints=web"
+    networks:
+      - traefik
+  traefik:
+    image: traefik:latest
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.endpoint=unix:///var/run/docker.sock"
+      - "--providers.docker.network=traefik"
+      - "--entrypoints.web.address=:80"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/opt/traefik/log/access.log"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - traefik
+    ports:
+      - "80:80"
+      # Traefik dashboard
+      - "8080:8080"
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+networks:
+    traefik:
