@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  nexus:
+    image: bowens/nexus-oss-apk-composer
+    container_name: "${PROJECT_NAME}_nexus"
+    network_mode: bridge
+    ports:
+      - 8081:8081
+    labels:
+      - "traefik.http.routers.${PROJECT_NAME}_nexus.rule=Host(`nexus.${PROJECT_BASE_URL}`)"
+      - "traefik.http.services.${PROJECT_NAME}_nexus.loadbalancer.server.port=8081"
