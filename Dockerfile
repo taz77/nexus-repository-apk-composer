@@ -1,5 +1,5 @@
 # Global Arg
-ARG NEXUS_VERSION=3.19.1
+ARG NEXUS_VERSION=3.20.1
 ARG NEXUS_BUILD=01
 FROM maven:3-jdk-8-alpine AS build
 # Passing global vars into this stage of the build
@@ -12,7 +12,7 @@ COPY nexus-repository-composer/. /nexus-repository-composer/
 COPY nexus-repository-apk/. /nexus-repository-apk/
 
 # Composer build
-RUN cd /nexus-repository-composer/; sed -i "s/3.19.1-01/${NEXUS_VERSION}-${NEXUS_BUILD}/g" pom.xml; \
+RUN cd /nexus-repository-composer/; sed -i "s/3.20.1.1-01/${NEXUS_VERSION}-${NEXUS_BUILD}/g" pom.xml; \
     mvn clean package;
 # APK Build
 RUN cd /nexus-repository-apk/; \
