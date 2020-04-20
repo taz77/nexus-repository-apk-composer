@@ -5,7 +5,7 @@ services:
 
 env:
   matrix:
-  - NEXUS_VERSION=3.21.2 TAGS=0.0.3,latest NEXUS_BUILD=03
+  - NEXUS_VERSION=3.22.1 TAGS=0.0.4,latest NEXUS_BUILD=02
 
 script:
 - make 
