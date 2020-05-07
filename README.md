@@ -24,12 +24,3 @@ docker build . -t nexus-cache-repo
 
 ## Compose Files
 Contained in this repository is a `docker-compose.yml` can be used to create a local build of this repository via `docker-compose`. For stack deployments (Swarm) there is an example file named `docker-stack-compose.yml`.
-
-## Versioning
-Because this project is a derivative of the Nexus OSS releases we use an additional set of version numbers numbers to define the state of this repositories code.
-
-The Docker image contains the Nexus version along with the local version of this code. The format for versioning include the version of Nexus OSS being used followed by the version of this software.
-
-Example: `nexus-repository-apk-composer:3.19.1-0.0.1`
-
-Where the version of Nexus OSS being used is `3.19.1` and the version of this code is `0.0.1`
