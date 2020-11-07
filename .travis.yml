@@ -5,10 +5,13 @@ services:
 
 env:
   matrix:
-  - NEXUS_VERSION=3.27.0 TAGS=0.0.6,latest NEXUS_BUILD=03
+  - NEXUS_VERSION=3.28.1 TAGS=0.0.7,latest NEXUS_BUILD=01
 
 script:
 - make 
 
-after_success:
-- . "${TRAVIS_BUILD_DIR}/release.sh"
+deploy:
+  provider: script
+  script: bash ${TRAVIS_BUILD_DIR}/release.sh
+  on:
+    branch: master
