@@ -12,11 +12,11 @@ COPY nexus-repository-composer/. /nexus-repository-composer/
 COPY nexus-repository-apk/. /nexus-repository-apk/
 
 # Composer build
-RUN cd /nexus-repository-composer/; sed -i "s/3.20.1.1-01/${NEXUS_VERSION}-${NEXUS_BUILD}/g" pom.xml; \
-    mvn clean package -PbuildKar;
+RUN cd /nexus-repository-composer/; \
+    mvn clean package -q -PbuildKar;
 # APK Build
 RUN cd /nexus-repository-apk/; \
-    mvn clean package -PbuildKar;
+    mvn clean package -q -PbuildKar;
 
 # Installation stage
 FROM sonatype/nexus3:${NEXUS_VERSION}
