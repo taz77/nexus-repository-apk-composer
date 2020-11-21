@@ -1,0 +1,50 @@
+name: Docker
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - 0.0.7
+      - latest
+
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  IMAGE_NAME: bowens/nexus-oss-apk-composer
+  NEXUS_VERSION: 3.28.1
+  NEXUS_BUILD: 01
+  DOCKER_USERNAME: ${{ secrets.DockerUsername }}
+  DOCKER_PASSWORD: ${{ secrets.DockerPassword }}
+
+jobs:
+  # Run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run tests
+        run: |
+          make
+
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+    # Ensure test job passes before pushing image.
+    needs: test
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and Deploy
+        run: bash release.sh
