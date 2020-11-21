@@ -32,6 +32,7 @@ jobs:
 
       - name: Run tests
         run: |
+          git submodule update --init --recursive
           make
 
   # Push image to GitHub Packages.
