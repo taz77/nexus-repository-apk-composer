@@ -54,6 +54,6 @@ jobs:
           with:
             push: true
             build-args: |
-              NEXUS_VERSION=$NEXUS_VERSION
-              NEXUS_BUILD=$NEXUS_BUILD
+              NEXUS_VERSION=${{ NEXUS_VERSION }}
+              NEXUS_BUILD=${{ NEXUS_BUILD }}
             tags: ${{ steps.docker_meta.outputs.tags }}
