@@ -52,4 +52,6 @@ jobs:
             build-args: |
               NEXUS_VERSION=${{ env.NEXUS_VERSION }}
               NEXUS_BUILD=${{ env.NEXUS_BUILD }}
-            tags: ${{ steps.docker_meta.outputs.tags }}
+            tags: |
+              bowens/nexus-oss-apk-composer:latest
+              owens/nexus-oss-apk-composer:0.0.8
