@@ -14,15 +14,14 @@ on:
   # Run tests for any PRs.
   pull_request:
 
-env:
-  IMAGE_NAME: bowens/nexus-oss-apk-composer
-  NEXUS_VERSION: latest
-  NEXUS_BUILD: 01
-  DOCKER_USERNAME: ${{ secrets.DockerUsername }}
-  DOCKER_PASSWORD: ${{ secrets.DockerPassword }}
+
+
 
 jobs:
   main:
+      env:
+        NEXUS_VERSION: latest
+        NEXUS_BUILD: 01
       runs-on: ubuntu-latest
       steps:
         -
@@ -54,6 +53,6 @@ jobs:
           with:
             push: true
             build-args: |
-              NEXUS_VERSION=${{ NEXUS_VERSION }}
-              NEXUS_BUILD=${{ NEXUS_BUILD }}
+              NEXUS_VERSION=$NEXUS_VERSION
+              NEXUS_BUILD=$NEXUS_BUILD
             tags: ${{ steps.docker_meta.outputs.tags }}
