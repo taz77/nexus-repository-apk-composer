@@ -16,9 +16,6 @@ on:
 
 jobs:
   main:
-      env:
-        NEXUS_VERSION: latest
-        NEXUS_BUILD: 01
       runs-on: ubuntu-latest
       steps:
         -
@@ -52,4 +49,7 @@ jobs:
           uses: docker/build-push-action@v2
           with:
             push: true
+            build-args: |
+              NEXUS_VERSION=latest
+              NEXUS_BUILD=01
             tags: ${{ steps.docker_meta.outputs.tags }}
