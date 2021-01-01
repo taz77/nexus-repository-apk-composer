@@ -8,3 +8,4 @@ IFS=',' read -ra tags <<< "${TAGS}"
 
 for tag in "${tags[@]}"; do
     make release TAG="${tag}";
+done
