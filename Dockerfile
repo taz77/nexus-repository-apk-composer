@@ -11,6 +11,14 @@ ENV NEXUS_VERSION=${NEXUS_VERSION} \
 COPY nexus-repository-composer/. /nexus-repository-composer/
 COPY nexus-repository-apk/. /nexus-repository-apk/
 
+# This section can be used if you want to build behind a cache proxy
+# Since we want to execute the mvn command with RUN (and not when the container gets started),
+# we have to do here some manual setup which would be made by the maven's entrypoint script
+# RUN mkdir -p /root/.m2 \
+#     && mkdir /root/.m2/repository
+# # Copy maven settings, containing repository configurations
+# COPY settings.xml /root/.m2
+
 # Composer build
 RUN cd /nexus-repository-composer/; \
     mvn clean package -q -PbuildKar;
@@ -25,7 +33,7 @@ ARG NEXUS_VERSION
 ARG NEXUS_BUILD
 
 # APK settings
-ARG FORMAT_VERSION=0.0.13-SNAPSHOT
+ARG FORMAT_VERSION=0.0.14-SNAPSHOT
 ARG DEPLOY_DIR=/opt/sonatype/nexus/deploy/
 
 # Composer settings

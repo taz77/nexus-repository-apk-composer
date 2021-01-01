@@ -8,7 +8,7 @@ on:
 
     # Publish `v1.2.3` tags as releases.
     tags:
-      - 0.0.7
+      - 0.0.8
       - latest
 
   # Run tests for any PRs.
@@ -16,7 +16,7 @@ on:
 
 env:
   IMAGE_NAME: bowens/nexus-oss-apk-composer
-  NEXUS_VERSION: 3.28.1
+  NEXUS_VERSION: latest
   NEXUS_BUILD: 01
   DOCKER_USERNAME: ${{ secrets.DockerUsername }}
   DOCKER_PASSWORD: ${{ secrets.DockerPassword }}
