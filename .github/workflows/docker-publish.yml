@@ -54,4 +54,4 @@ jobs:
               NEXUS_BUILD=${{ env.NEXUS_BUILD }}
             tags: |
               bowens/nexus-oss-apk-composer:latest
-              owens/nexus-oss-apk-composer:0.0.8
+              bowens/nexus-oss-apk-composer:0.0.8
