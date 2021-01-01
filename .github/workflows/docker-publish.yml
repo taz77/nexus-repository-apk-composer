@@ -24,7 +24,7 @@ env:
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
+  test-build:
     runs-on: ubuntu-18.04
 
     steps:
@@ -37,11 +37,11 @@ jobs:
 
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  docker-push:
     # Ensure test job passes before pushing image.
     needs: test
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: github.event_name == 'push'
 
     steps:
