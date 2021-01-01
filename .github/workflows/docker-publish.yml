@@ -52,7 +52,4 @@ jobs:
           uses: docker/build-push-action@v2
           with:
             push: true
-            build-args: |
-              NEXUS_VERSION=$NEXUS_VERSION
-              NEXUS_BUILD=$NEXUS_BUILD
             tags: ${{ steps.docker_meta.outputs.tags }}
