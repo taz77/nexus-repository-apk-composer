@@ -19,6 +19,8 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
+          git submodule init; \
+          git submodule update; \
           docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
 
       - name: Run Trivy vulnerability scanner
