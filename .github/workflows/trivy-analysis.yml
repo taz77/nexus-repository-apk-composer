@@ -10,8 +10,8 @@ on:
     - cron: '35 2 * * 2'
 
 jobs:
-  build:
-    name: Build
+  trivy-analysis:
+    name: Build and Scan
     runs-on: "ubuntu-18.04"
     steps:
       - name: Checkout code
