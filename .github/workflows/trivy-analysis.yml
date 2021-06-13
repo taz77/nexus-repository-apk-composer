@@ -7,7 +7,7 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ master ]
   schedule:
-    - cron: '35 2 * * 2'
+    - cron:  '0 0 * * 0'
 
 jobs:
   trivy-analysis:
@@ -21,12 +21,12 @@ jobs:
         run: |
           git submodule init; \
           git submodule update; \
-          docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
+          docker build -t nexus-repository-apk-composer:${{ github.sha }} .
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+          image-ref: 'nexus-repository-apk-composer:${{ github.sha }}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
