@@ -65,3 +65,5 @@ jobs:
             tags: |
               bowens/nexus-oss-apk-composer:latest
               bowens/nexus-oss-apk-composer:0.0.10
+              ghcr.io/taz77/nexus-oss-apk-composer:latest
+              ghcr.io/taz77/nexus-oss-apk-composer:0.0.10
