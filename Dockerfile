@@ -1,6 +1,6 @@
 # Global Arg
-ARG NEXUS_VERSION=3.30.1
-ARG NEXUS_BUILD=01
+ARG NEXUS_VERSION=3.32.0
+ARG NEXUS_BUILD=03
 FROM maven:3-jdk-8-alpine AS build
 # Passing global vars into this stage of the build
 ARG NEXUS_VERSION
@@ -33,7 +33,7 @@ ARG NEXUS_VERSION
 ARG NEXUS_BUILD
 
 # APK settings
-ARG FORMAT_VERSION=0.0.19-SNAPSHOT
+ARG FORMAT_VERSION=0.0.21-SNAPSHOT
 ARG DEPLOY_DIR=/opt/sonatype/nexus/deploy/
 
 # Composer settings
