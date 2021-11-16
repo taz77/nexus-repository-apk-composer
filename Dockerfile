@@ -1,5 +1,5 @@
 # Global Arg
-ARG NEXUS_VERSION=3.32.0
+ARG NEXUS_VERSION=3.36.0
 ARG NEXUS_BUILD=03
 FROM maven:3-jdk-8-alpine AS build
 # Passing global vars into this stage of the build
