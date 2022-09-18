@@ -24,3 +24,6 @@ docker build . -t nexus-cache-repo
 
 ## Compose Files
 Contained in this repository is a `docker-compose.yml` can be used to create a local build of this repository via `docker-compose`. For stack deployments (Swarm) there is an example file named `docker-stack-compose.yml`.
+
+## Versions
+Major version 1 of this container corresponds to 3.41 and greater of Nexus
