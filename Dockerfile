@@ -27,13 +27,13 @@ RUN apt-get update \
     ; \
     wget https://github.com/sonatype-nexus-community/nexus-repository-composer/archive/refs/tags/composer-parent-0.0.23.tar.gz \
     ; \
-    wget https://github.com/sonatype-nexus-community/nexus-repository-apk/archive/refs/tags/apk-parent-0.0.23.tar.gz \
+    wget https://github.com/sonatype-nexus-community/nexus-repository-apk/archive/refs/tags/apk-parent-0.0.26.tar.gz \
     ; \
-    tar -xvf apk-parent-0.0.23.tar.gz \
+    tar -xvf apk-parent-0.0.26.tar.gz \
     ; \
     tar -xvf composer-parent-0.0.23.tar.gz \
     ; \
-    cd nexus-repository-apk-apk-parent-0.0.23 \
+    cd nexus-repository-apk-apk-parent-0.0.26 \
     ; \
     mvn clean package -q -PbuildKar \
     ; \
@@ -60,7 +60,7 @@ ENV NEXUS_VERSION=${NEXUS_VERSION} \
 
 USER root
 # Copy APK kar
-COPY --from=build /tmp/build/nexus-repository-apk-apk-parent-0.0.23/nexus-repository-apk/target/nexus-repository-apk-0.0.23-bundle.kar ${DEPLOY_DIR}
+COPY --from=build /tmp/build/nexus-repository-apk-apk-parent-0.0.26/nexus-repository-apk/target/nexus-repository-apk-0.0.26-bundle.kar ${DEPLOY_DIR}
 # Copy Composer kar
 COPY --from=build /tmp/build/nexus-repository-composer-composer-parent-0.0.23/nexus-repository-composer/target/nexus-repository-composer-0.0.23-bundle.kar ${DEPLOY_DIR}
 USER nexus
