@@ -1,5 +1,5 @@
 # Global Arg
-ARG NEXUS_VERSION=3.37.3
+ARG NEXUS_VERSION=3.41.1
 ARG NEXUS_BUILD=01
 FROM maven:3.8.4-jdk-8-slim AS build
 # Passing global vars into this stage of the build
@@ -25,13 +25,13 @@ RUN apt-get update \
     ; \
     cd /tmp/build \
     ; \
-    wget https://github.com/sonatype-nexus-community/nexus-repository-composer/archive/refs/tags/composer-parent-0.0.18.tar.gz \
+    wget https://github.com/sonatype-nexus-community/nexus-repository-composer/archive/refs/tags/composer-parent-0.0.23.tar.gz \
     ; \
     wget https://github.com/sonatype-nexus-community/nexus-repository-apk/archive/refs/tags/apk-parent-0.0.23.tar.gz \
     ; \
     tar -xvf apk-parent-0.0.23.tar.gz \
     ; \
-    tar -xvf composer-parent-0.0.18.tar.gz \
+    tar -xvf composer-parent-0.0.23.tar.gz \
     ; \
     cd nexus-repository-apk-apk-parent-0.0.23 \
     ; \
@@ -39,7 +39,7 @@ RUN apt-get update \
     ; \
     cd .. \
     ; \
-    cd nexus-repository-composer-composer-parent-0.0.18 \
+    cd nexus-repository-composer-composer-parent-0.0.23 \
     ; \
     mvn clean package -q -PbuildKar
 
@@ -62,5 +62,5 @@ USER root
 # Copy APK kar
 COPY --from=build /tmp/build/nexus-repository-apk-apk-parent-0.0.23/nexus-repository-apk/target/nexus-repository-apk-0.0.23-bundle.kar ${DEPLOY_DIR}
 # Copy Composer kar
-COPY --from=build /tmp/build/nexus-repository-composer-composer-parent-0.0.18/nexus-repository-composer/target/nexus-repository-composer-0.0.18-bundle.kar ${DEPLOY_DIR}
+COPY --from=build /tmp/build/nexus-repository-composer-composer-parent-0.0.23/nexus-repository-composer/target/nexus-repository-composer-0.0.23-bundle.kar ${DEPLOY_DIR}
 USER nexus
