@@ -1,6 +1,6 @@
 -include env_make
 
-NEXUS_VERSION ?= 3.19.1
+NEXUS_VERSION ?= 3.41.1
 NEXUS_BUILD ?= 01
 
 
