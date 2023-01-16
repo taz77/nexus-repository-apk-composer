@@ -1,7 +1,7 @@
 # Global Arg
 ARG NEXUS_VERSION=3.41.1
 ARG NEXUS_BUILD=01
-FROM maven:3.8.4-jdk-8-slim AS build
+FROM maven:3.8.6-openjdk-8-slim AS build
 # Passing global vars into this stage of the build
 ARG NEXUS_VERSION
 ARG NEXUS_BUILD
