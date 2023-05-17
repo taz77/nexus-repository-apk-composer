@@ -27,3 +27,4 @@ Contained in this repository is a `docker-compose.yml` can be used to create a l
 
 ## Versions
 Major version 1 of this container corresponds to 3.41 and greater of Nexus
+
