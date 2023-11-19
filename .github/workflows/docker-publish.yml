@@ -8,7 +8,8 @@ on:
     # Publish `master` as Docker `latest` image.
     branches:
       - master
-
+    tags:
+      - "v*.*.*"
   # Run tests for any PRs.
   pull_request:
 
