@@ -9,11 +9,6 @@ on:
     branches:
       - master
 
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - bowens/nexus-oss-apk-composer:1.0.0
-      - bowens/nexus-oss-apk-composer:latest
-
   # Run tests for any PRs.
   pull_request:
 
