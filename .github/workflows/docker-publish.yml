@@ -32,9 +32,7 @@ jobs:
           # generate Docker tags based on the following events/attributes
           tags: |
             type=raw,value=latest
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            type=raw,value={{version}}
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -62,11 +60,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: |
-            bowens/nexus-oss-apk-composer:latest
-            bowens/nexus-oss-apk-composer:1.0.0
-            ghcr.io/taz77/nexus-oss-apk-composer:latest
-            ghcr.io/taz77/nexus-oss-apk-composer:1.0.0
+          tags: ${{ steps.meta.outputs.tags }}
       - name: Notify Slack
         uses: 8398a7/action-slack@v3
         with:
