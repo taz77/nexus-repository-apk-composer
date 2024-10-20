@@ -1,38 +1,32 @@
-name: Trivy-Scan
+name: Trivy Security Scan
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "master" ]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ master ]
+    branches: [ "master" ]
   schedule:
-    - cron:  '0 0 * * 0'
+    - cron: '0 0 * * 0'  # Run weekly on Sundays
 
 jobs:
-  trivy-analysis:
-    name: Build and Scan
-    runs-on: "ubuntu-22.04"
+  scan:
+    name: Trivy Scan
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build an image from Dockerfile
-        run: |
-          git submodule init; \
-          git submodule update; \
-          docker build -t nexus-repository-apk-composer:${{ github.sha }} .
-
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'nexus-repository-apk-composer:${{ github.sha }}'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
 
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
         with:
           sarif_file: 'trivy-results.sarif'
