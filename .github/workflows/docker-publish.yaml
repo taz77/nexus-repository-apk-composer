@@ -1,4 +1,4 @@
-name: Docker
+name: Container Build and Push
 
 on:
   workflow_dispatch:
@@ -16,6 +16,7 @@ on:
 
 jobs:
   main:
+    name: Master Job
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
